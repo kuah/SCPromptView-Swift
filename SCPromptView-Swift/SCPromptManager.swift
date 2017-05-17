@@ -108,8 +108,8 @@ final class SCPromptManager: NSObject {
     ///
     /// - parameter promptView     :需要显示的view
     private func showInWindow(promptView:SCPromptView){
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        appDelegate.window?.addSubview(promptView)
+        let appDelegate = UIApplication.shared.delegate
+        appDelegate?.window??.addSubview(promptView)
         if promptView.gestureRecognizers == nil || promptView.gestureRecognizers?.count==0{
             promptView.addGestureRecognizer(UITapGestureRecognizer(target: self, action:#selector(self.tapToHide(tap:))))
         }
