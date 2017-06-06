@@ -3,8 +3,7 @@
 [SCPromptView-Swift](https://github.com/Chan4iOS/SCPromptView-Swift): 显示在顶部的提示控件
 [SCPromptView-Objective_C](https://github.com/Chan4iOS/SCPromptView)
 
->**你的star是我最大的动力**
-
+**你的star是我最大的动力**
 
 ![effect.gif](http://upload-images.jianshu.io/upload_images/2170902-85ffe61c9e99f291.gif?imageMogr2/auto-orient/strip)
 
@@ -102,9 +101,7 @@ func clickBtn(){
 [SCPromptView](https://github.com/Chan4iOS/SCPromptView-Swift)  : A prompt view which show in the top of the screen .
 
 
->**Your star is my biggest motivation.**
-
-<!--##Effect
+**Your star is my biggest motivation.**
 
 ![effect.gif](http://upload-images.jianshu.io/upload_images/2170902-85ffe61c9e99f291.gif?imageMogr2/auto-orient/strip)-->
 
