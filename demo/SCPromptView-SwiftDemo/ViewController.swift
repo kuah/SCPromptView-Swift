@@ -28,20 +28,20 @@ class ViewController: UIViewController {
         let margin = (screenWidth-width)/2
      
         let button = UIButton(frame: CGRect(x:margin, y: 100, width: width, height: height))
-        let button1 = UIButton(frame: CGRect(x:margin, y: 200, width: width, height: height))
-        let button2 = UIButton(frame: CGRect(x:margin, y: 300, width: width, height: height))
+//        let button1 = UIButton(frame: CGRect(x:margin, y: 200, width: width, height: height))
+//        let button2 = UIButton(frame: CGRect(x:margin, y: 300, width: width, height: height))
         
         view.addSubview(button)
-        view.addSubview(button1)
-        view.addSubview(button2)
+//        view.addSubview(button1)
+//        view.addSubview(button2)
         
         button.setTitle("0", for: UIControlState.normal)
-        button1.setTitle("1", for: UIControlState.normal)
-        button2.setTitle("2", for: UIControlState.normal)
+//        button1.setTitle("1", for: UIControlState.normal)
+//        button2.setTitle("2", for: UIControlState.normal)
         
         button.backgroundColor = UIColor.red
-        button1.backgroundColor = UIColor.yellow
-        button2.backgroundColor = UIColor.blue
+//        button1.backgroundColor = UIColor.yellow
+//        button2.backgroundColor = UIColor.blue
         
         button.addTarget(self, action: #selector(clickBtn), for: UIControlEvents.touchUpInside)
         

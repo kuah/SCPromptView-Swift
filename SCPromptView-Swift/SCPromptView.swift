@@ -8,6 +8,9 @@
 
 import UIKit
 
+let iPhoneX = (UIScreen.main.bounds.size == CGSize(width: 375, height: 812))
+
+let SC_SUGGEST_TOP_PADDING = iPhoneX ? 30 : 20
 
 class SCPromptView: UIView {
     lazy var contentView:UIView = UIView()
@@ -32,11 +35,11 @@ class SCPromptView: UIView {
     }
     //MARK: default
     func sc_height() -> CGFloat {
-        return 64
+        return (iPhoneX ? 88 : 64)
     }
     ///滑动距离
     func sc_slideDistanse() -> CGFloat {
-        return 10
+        return 18
     }
     ///显示时间
     func sc_showTime() -> TimeInterval {

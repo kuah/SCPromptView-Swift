@@ -13,8 +13,8 @@ class TestView: SCPromptView {
     
     override func sc_setUpCustomSubViews() {
         backgroundColor = UIColor.clear
-        contentView.backgroundColor = UIColor.init(red:CGFloat(arc4random()%255)*1.0/255, green: CGFloat(arc4random()%255)*1.0/255, blue: CGFloat(arc4random()%255)*1.0/255, alpha:1)
-        contentView.layer.cornerRadius = 10
+        self.backgroundColor = UIColor.init(red:CGFloat(arc4random()%255)*1.0/255, green: CGFloat(arc4random()%255)*1.0/255, blue: CGFloat(arc4random()%255)*1.0/255, alpha:1)
+//        contentView.layer.cornerRadius = 10
         contentView.layer.masksToBounds = true
         label = UILabel(frame: contentView.bounds)
         label?.textColor = UIColor.white
