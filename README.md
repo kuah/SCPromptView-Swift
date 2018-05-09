@@ -18,7 +18,7 @@
 
 ### CocoaPod
 ```
-pod 'SCPromptView'
+pod 'SCPromptView-Swift'
 ```
 
 ## 使用
