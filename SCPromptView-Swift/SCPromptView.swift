@@ -8,9 +8,9 @@
 
 import UIKit
 
-let iPhoneX = (UIScreen.main.bounds.size == CGSize(width: 375, height: 812))
+let lt_iPhoneX = (UIApplication.shared.statusBarFrame.size.height>20)
 
-let SC_SUGGEST_TOP_PADDING = iPhoneX ? 30 : 20
+let SC_SUGGEST_TOP_PADDING = lt_iPhoneX ? 30 : 20
 
 class SCPromptView: UIView {
     lazy var contentView:UIView = UIView()
@@ -35,7 +35,7 @@ class SCPromptView: UIView {
     }
     //MARK: default
     func sc_height() -> CGFloat {
-        return (iPhoneX ? 88 : 64)
+        return (lt_iPhoneX ? 88 : 64)
     }
     ///滑动距离
     func sc_slideDistanse() -> CGFloat {

@@ -18,9 +18,9 @@ import UIKit
  
  */
 
-typealias SCDelayTask = (_ cancel : Bool) -> Void
+public typealias SCDelayTask = (_ cancel : Bool) -> Void
 
-func sc_delay(_ time: TimeInterval, task: @escaping ()->()) ->  SCDelayTask? {
+public func sc_delay(_ time: TimeInterval, task: @escaping ()->()) ->  SCDelayTask? {
     
     //封装系统延时任务
     func dispatch_later(block: @escaping ()->()) {
@@ -53,6 +53,6 @@ func sc_delay(_ time: TimeInterval, task: @escaping ()->()) ->  SCDelayTask? {
     return result
 }
 //取消任务(实际上加了拦截)
-func sc_dt_cancel(_ task: SCDelayTask?) {
+public func sc_dt_cancel(_ task: SCDelayTask?) {
     task?(true)
 }

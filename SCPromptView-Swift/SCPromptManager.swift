@@ -44,7 +44,8 @@ final class SCPromptManager: NSObject {
     ///
     /// - parameter viewClass      :view的类型
     /// - parameter showCommand    :注册显示命令
-    func registerPromptView(_ viewClass:AnyClass,_ showCommand:String){
+    @objc(registerPromptView:showCommand:)
+    open func registerPromptView(_ viewClass:AnyClass,_ showCommand:String){
         assert(viewClass.isSubclass(of: SCPromptView.classForCoder()),"注册的class必须为SCPromptView的子类,the viewClass must be subClass of SCPromptView")
         registerInfo[showCommand] = viewClass
     }
@@ -52,11 +53,12 @@ final class SCPromptManager: NSObject {
     ///
     /// - parameter showCommand    :该类注册的显示命令
     /// - parameter param          :该param会被作为调用sc_loadParam的参数
-    func showPromptViewWithCommand(_ showCommand:String,_ param:Any?) {
+    @objc(showPromptViewWithCommand:param:)
+    open func showPromptViewWithCommand(_ showCommand:String,_ param:Any?) {
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: SCPrompt_Show_Command), object: param, userInfo: [SCPrompt_Show_Command:showCommand])
     }
     /// 收到显示命令
-    func didReceivedShowCommand(notification:Notification){
+    @objc fileprivate func didReceivedShowCommand(notification:Notification){
         let command = notification.userInfo?[SCPrompt_Show_Command] as? String
         guard command != nil else {
             return;
@@ -74,7 +76,7 @@ final class SCPromptManager: NSObject {
     ///
     /// - parameter showCommand    :该类注册的显示命令
     /// - parameter param          :该param会被作为调用sc_loadParam的参数
-    private func match(showCommand:String, param:Any?){
+    fileprivate func match(showCommand:String, param:Any?){
         let matchClass:AnyClass? = registerInfo[showCommand]
         guard matchClass != nil else {
             return;
@@ -88,7 +90,7 @@ final class SCPromptManager: NSObject {
     ///根据显示命令来尝试在重用池获取到view，获取不到则新建，保证有view返回
     ///
     /// - parameter showCommand    :该类注册的显示命令
-    private func getReusableView(showCommand:String)->SCPromptView{
+    fileprivate func getReusableView(showCommand:String)->SCPromptView{
         var promptViewQ:[SCPromptView]? = reusableViewPool[showCommand]
         
         if promptViewQ != nil && (promptViewQ?.count)!>1 {
@@ -107,7 +109,7 @@ final class SCPromptManager: NSObject {
     ///将view显示在窗口上
     ///
     /// - parameter promptView     :需要显示的view
-    private func showInWindow(promptView:SCPromptView){
+    fileprivate func showInWindow(promptView:SCPromptView){
         let appDelegate = UIApplication.shared.delegate
         appDelegate?.window??.addSubview(promptView)
         if promptView.gestureRecognizers == nil || promptView.gestureRecognizers?.count==0{
@@ -122,7 +124,7 @@ final class SCPromptManager: NSObject {
     ///延迟消失（延迟的时间，就是view显示的时间）
     ///
     /// - parameter promptView     :需要消失的view
-    private func delayHideInWindow(promptView:SCPromptView){
+    fileprivate func delayHideInWindow(promptView:SCPromptView){
         guard promptView.superview != nil else {
             return
         }
@@ -135,7 +137,7 @@ final class SCPromptManager: NSObject {
     ///消失动画  
     ///
     /// - parameter promptView     :需要消失的view
-    private func hideInWindow(promptView:SCPromptView){
+    fileprivate func hideInWindow(promptView:SCPromptView){
         guard showingView == promptView else {
             return
         }
@@ -148,7 +150,7 @@ final class SCPromptManager: NSObject {
     ///直接消失
     ///
     /// - parameter promptView     :需要消失的view
-    private func hideDirectly(promptView:SCPromptView){
+    fileprivate func hideDirectly(promptView:SCPromptView){
         guard promptView.superview != nil && promptView.showCommand != nil else {
             return
         }
@@ -161,21 +163,20 @@ final class SCPromptManager: NSObject {
         reusableViewPool[promptView.showCommand!] = queueForCommand
     }
     ///点击马上消失
-   func tapToHide(tap:UITapGestureRecognizer){
+    @objc fileprivate func tapToHide(tap:UITapGestureRecognizer){
         let promptView = tap.view as? SCPromptView
         
         if promptView != nil {
             hideInWindow(promptView: promptView!)
         }
     }
-    
 }
 ///convenient regiser func 便利的注册方法
-func sc_prompt_register(viewClass:AnyClass,showCommand:String){
+public func sc_prompt_register(viewClass:AnyClass,showCommand:String){
     SCPromptManager.shared.registerPromptView(viewClass, showCommand)
 }
 ///convenient show func  便利的显示方法
-func sc_prompt_show(showCommand:String,param:Any?){
+public func sc_prompt_show(showCommand:String,param:Any?){
     SCPromptManager.shared.showPromptViewWithCommand(showCommand, param)
     
 }
